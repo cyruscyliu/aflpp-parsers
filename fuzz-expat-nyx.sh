@@ -1,1 +1,10 @@
-afl-fuzz -D -i /src/seeds/expat/ -o /src/outputs/expat-nyx/ -X -- /src/build/expat-nyx/
+#!/bin/bash
+
+rid=$1
+suffix=""
+
+if [ ! -z $rid ]; then
+    suffix=-$rid
+fi
+
+afl-fuzz -D -i /src/seeds/expat/ -o /src/outputs/expat-nyx$suffix/ -X -- /src/build/expat-nyx/
