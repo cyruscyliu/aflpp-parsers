@@ -1,0 +1,6 @@
+["foo",
+ "bar", "baz",
+ true,false,null,{"ket":"value"},
+ [full,null,null,[]],
+ "\n\r\\"
+]

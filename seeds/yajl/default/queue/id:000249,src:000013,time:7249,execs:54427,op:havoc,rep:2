@@ -1,0 +1,8 @@
+["foo",
+ "bar", "baz",
+ true,
+ "bar", "baz",
+ true,falseJfalse,null,{"key":"value"},
+ [null,null,null,[]],
+ "\n\r\\"
+]
