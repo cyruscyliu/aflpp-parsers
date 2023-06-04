@@ -1,0 +1,24 @@
+From 8ea557e2f22385c6ecdc385a047b35a2c25814b7 Mon Sep 17 00:00:00 2001
+From: Qiang Liu <cyruscyliu@gmail.com>
+Date: Sun, 4 Jun 2023 13:53:15 +0200
+Subject: [PATCH] make sure nyxnet can run on non-zero cpus
+
+---
+ fuzz_runner/src/nyx/params.rs | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/fuzz_runner/src/nyx/params.rs b/fuzz_runner/src/nyx/params.rs
+index b3eab6a..6a57be6 100644
+--- a/fuzz_runner/src/nyx/params.rs
++++ b/fuzz_runner/src/nyx/params.rs
+@@ -161,7 +161,6 @@ impl QemuParams {
+ 
+         match fuzzer_config.runtime.process_role() {
+             QemuNyxRole::StandAlone | QemuNyxRole::Parent => {
+-                assert!(qemu_id == 0);
+                 QemuProcess::prepare_workdir(workdir, fuzzer_config.fuzz.seed_path.clone());
+             },
+             QemuNyxRole::Child => {
+-- 
+2.34.1
+

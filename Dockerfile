@@ -28,3 +28,9 @@ RUN cd /AFLplusplus && python3 nyx_mode/packer/packer/nyx_packer.py \
 RUN cp /AFLplusplus/libnyx.so /usr/local/lib/afl
 COPY fuzz-*.sh /AFLplusplus/
 COPY deploy.sh /AFLplusplus/
+
+COPY *.patch /AFLplusplus/
+RUN cd /AFLplusplus && patch -p 1 < 0001-make-sure-nyxnet-bind-the-same-cpu-id.patch
+RUN cd /AFLplusplus && make clean && make source-only && make install
+RUN cd /AFLplusplus/nyx_mode/libnyx && patch -p 1 < ../../0001-make-sure-nyxnet-can-run-on-non-zero-cpus.patch
+RUN cd /AFLplusplus/nyx_mode && rm -r libnyx/libnyx/target/release/ && ./build_nyx_support.sh && cp /AFLplusplus/libnyx.so /usr/local/lib/afl

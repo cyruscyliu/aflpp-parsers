@@ -1,0 +1,27 @@
+From 9eb386518db7aa23ba19eb13b0c2b5cf7dc3cd8e Mon Sep 17 00:00:00 2001
+From: Qiang Liu <cyruscyliu@gmail.com>
+Date: Sun, 4 Jun 2023 13:48:20 +0200
+Subject: [PATCH] make sure nyxnet bind the same cpu id
+
+---
+ src/afl-fuzz-init.c | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/src/afl-fuzz-init.c b/src/afl-fuzz-init.c
+index 13802f40..a7561f65 100644
+--- a/src/afl-fuzz-init.c
++++ b/src/afl-fuzz-init.c
+@@ -152,6 +152,10 @@ void bind_to_free_cpu(afl_state_t *afl) {
+ 
+       OKF("CPU binding request using -b %d successful.", afl->cpu_to_bind);
+ 
++  #ifdef __linux__
++      if (afl->fsrv.nyx_mode) { afl->fsrv.nyx_bind_cpu_id = afl->cpu_to_bind; }
++  #endif
++
+     }
+ 
+     return;
+-- 
+2.34.1
+
