@@ -27,3 +27,4 @@ RUN cd /AFLplusplus && python3 nyx_mode/packer/packer/nyx_packer.py \
     python3 nyx_mode/packer/packer/nyx_config_gen.py /src/build/yajl-nyx Kernel
 RUN cp /AFLplusplus/libnyx.so /usr/local/lib/afl
 COPY fuzz-*.sh /AFLplusplus/
+COPY deploy.sh /AFLplusplus/
